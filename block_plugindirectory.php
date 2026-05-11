@@ -27,7 +27,6 @@
  * @license    https://www.gnu.org/licenses/gpl-3.0.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
 
 use block_plugindirectory\local\plugin_collector;
 
