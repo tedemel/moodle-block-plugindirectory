@@ -1,0 +1,64 @@
+{{!
+    @template block_plugindirectory/row
+
+    A single compact plugin row, used as a partial in content.mustache.
+
+    Context: a single plugin object with all the fields described in
+    block_plugindirectory/content.
+
+    Example context (json):
+    {
+        "component": "block_myplugin",
+        "displayname": "My Plugin",
+        "type": "block",
+        "typename": "Blocks",
+        "version": "2026042900",
+        "moodledirurl": "https://moodle.org/plugins/block_myplugin",
+        "githuburl": "https://github.com/example/moodle-block_myplugin",
+        "has_github": true,
+        "readmehtml": "<p>Demo</p>",
+        "has_readme": true,
+        "readme_id": "plugindir-readme-block-myplugin",
+        "is_new": true,
+        "installedstr": "29 April 2026"
+    }
+}}
+<details data-plugindir-row
+         {{#is_new}}class="plugindir-row-new"{{/is_new}}
+         data-type="{{type}}"
+         data-search="{{component}} {{displayname}} {{typename}} {{type}}">
+    <summary class="plugindir-summary">
+        <span class="plugindir-name" title="{{component}}">{{displayname}}</span>
+        <span class="plugindir-compat text-{{compat_class}}"
+              title="{{compat_tooltip}}"
+              aria-label="{{compat_tooltip}}">{{compat_icon}}</span>
+        <span class="plugindir-type">{{type}}</span>
+        <span class="plugindir-actions">
+            {{#has_moodledir}}
+            <a href="{{moodledirurl}}" target="_blank" rel="noopener"
+               title="{{#str}} moodledir, block_plugindirectory {{/str}}">🔍</a>
+            {{/has_moodledir}}
+            {{#has_github}}
+            <a href="{{githuburl}}" target="_blank" rel="noopener"
+               title="GitHub">⌥</a>
+            {{/has_github}}
+        </span>
+    </summary>
+
+    <div class="plugindir-body">
+        <div class="plugindir-meta">
+            <code>{{component}}</code>
+            {{#version}} · v{{version}}{{/version}}
+            {{#installedstr}} · {{#str}} installed_on, block_plugindirectory {{/str}} {{installedstr}}{{/installedstr}}
+        </div>
+
+        {{#has_readme}}
+        <div class="plugindirectory-readme">
+            {{{readmehtml}}}
+        </div>
+        {{/has_readme}}
+        {{^has_readme}}
+        <div class="text-muted small">{{#str}} noreadme, block_plugindirectory {{/str}}</div>
+        {{/has_readme}}
+    </div>
+</details>

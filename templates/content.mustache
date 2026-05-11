@@ -1,0 +1,252 @@
+{{!
+    @template block_plugindirectory/content
+
+    Compact layout: only "new" plugins shown by default, all others hidden
+    behind a toggle button.
+
+    Context:
+    * plugincount, has_new, newcount
+    * newplugins / plugins (arrays)
+    * typeoptions: [{value, label}]
+
+    Example context (json):
+    {
+        "plugincount": "27 additional plugins installed",
+        "has_new": true,
+        "newcount": 1,
+        "newplugins": [],
+        "plugins": [],
+        "typeoptions": []
+    }
+}}
+<div class="block-plugindirectory" data-region="plugindir">
+
+    {{! ── NEW PLUGINS SECTION ── }}
+    {{#has_new}}
+    <div class="plugindir-new-section mb-2" data-region="plugindir-new-section">
+        <div class="plugindir-new-header d-flex align-items-center mb-1">
+            <span class="plugindir-new-pulse mr-2"></span>
+            <span class="text-success small font-weight-bold">{{#str}} new_section, block_plugindirectory {{/str}}</span>
+            <span class="badge badge-success ml-auto">{{newcount}}</span>
+        </div>
+        {{#newplugins}}
+        {{> block_plugindirectory/row }}
+        {{/newplugins}}
+    </div>
+    {{/has_new}}
+
+    {{! ── TOGGLE BUTTON ── }}
+    <button type="button"
+            class="btn btn-sm btn-link p-0 plugindir-toggle-all"
+            data-action="plugindir-show-all">
+        <span data-region="toggle-text">▸ {{plugincount}}</span>
+    </button>
+
+    {{! ── COLLAPSIBLE: search + full list ── }}
+    <div data-region="plugindir-allwrap" hidden>
+        <div class="d-flex mt-2 mb-2" style="gap:0.4rem;">
+            <input type="search"
+                   class="form-control form-control-sm flex-grow-1"
+                   data-action="plugindir-search"
+                   placeholder="🔍 Suchen…"
+                   aria-label="Plugins durchsuchen">
+            <select class="form-control form-control-sm w-auto"
+                    data-action="plugindir-typefilter"
+                    aria-label="Nach Plugintyp filtern">
+                <option value="">{{#str}} filter_alltypes, block_plugindirectory {{/str}}</option>
+                {{#typeoptions}}
+                <option value="{{value}}">{{label}}</option>
+                {{/typeoptions}}
+            </select>
+        </div>
+        <div class="small text-muted mb-2" data-region="plugindir-empty" hidden>Keine Treffer.</div>
+
+        <div data-region="plugindir-list">
+        {{#plugins}}
+        {{> block_plugindirectory/row }}
+        {{/plugins}}
+        </div>
+    </div>
+
+</div>
+
+<script>
+(function() {
+    var roots = document.querySelectorAll('[data-region="plugindir"]');
+    var root  = roots[roots.length - 1];
+    if (!root || root.dataset.plugindirInit) { return; }
+    root.dataset.plugindirInit = '1';
+
+    var input    = root.querySelector('[data-action="plugindir-search"]');
+    var typesel  = root.querySelector('[data-action="plugindir-typefilter"]');
+    var toggle   = root.querySelector('[data-action="plugindir-show-all"]');
+    var togText  = root.querySelector('[data-region="toggle-text"]');
+    var allwrap  = root.querySelector('[data-region="plugindir-allwrap"]');
+    var rows     = root.querySelectorAll('[data-region="plugindir-list"] [data-plugindir-row]');
+    var emptyMsg = root.querySelector('[data-region="plugindir-empty"]');
+    var collapsedLabel = togText ? togText.textContent : '';
+    var expandedLabel  = '▾ Einklappen';
+
+    function applyFilter() {
+        if (!allwrap || allwrap.hidden) { return; }
+        var q  = (input ? input.value : '').trim().toLowerCase();
+        var tf = typesel ? typesel.value : '';
+        var visible = 0;
+        rows.forEach(function(row) {
+            var hay = (row.dataset.search || '').toLowerCase();
+            var qMatch = q === '' || hay.indexOf(q) !== -1;
+            var tMatch = tf === '' || row.dataset.type === tf;
+            var match = qMatch && tMatch;
+            row.hidden = !match;
+            if (match) { visible++; }
+        });
+        if (emptyMsg) { emptyMsg.hidden = visible !== 0; }
+    }
+
+    function toggleAll() {
+        if (!allwrap) { return; }
+        allwrap.hidden = !allwrap.hidden;
+        if (togText) {
+            togText.textContent = allwrap.hidden ? collapsedLabel : expandedLabel;
+        }
+        if (!allwrap.hidden && input) { input.focus(); }
+    }
+
+    if (input)   { input.addEventListener('input', applyFilter); }
+    if (typesel) { typesel.addEventListener('change', applyFilter); }
+    if (toggle)  { toggle.addEventListener('click', toggleAll); }
+
+    // Prevent action links inside summary from toggling details.
+    root.querySelectorAll('summary a').forEach(function(a) {
+        a.addEventListener('click', function(ev) { ev.stopPropagation(); });
+    });
+})();
+</script>
+
+<style>
+.block-plugindirectory {
+    font-size: 0.85rem;
+    color: #212529;
+}
+.block-plugindirectory .plugindir-toggle-all {
+    color: #212529;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+}
+.block-plugindirectory .plugindir-toggle-all:hover {
+    color: var(--primary, #0f6cbf);
+    text-decoration: none;
+}
+
+.block-plugindirectory [data-plugindir-row] {
+    border-bottom: 1px solid #f0f0f0;
+    margin: 0;
+    background: transparent;
+}
+.block-plugindirectory [data-plugindir-row]:last-child {
+    border-bottom: none;
+}
+.block-plugindirectory [data-plugindir-row]:hover {
+    background: #f8f9fa;
+}
+.block-plugindirectory .plugindir-row-new {
+    border-left: 2px solid var(--success, #28a745);
+    padding-left: 4px;
+}
+
+.block-plugindirectory summary.plugindir-summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.25rem 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+.block-plugindirectory summary.plugindir-summary::-webkit-details-marker { display: none; }
+.block-plugindirectory summary.plugindir-summary::before {
+    content: '▸';
+    color: #495057;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+}
+.block-plugindirectory [data-plugindir-row][open] summary.plugindir-summary::before {
+    content: '▾';
+    color: #212529;
+}
+
+.block-plugindirectory .plugindir-name {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+    font-weight: 500;
+    color: #212529;
+}
+.block-plugindirectory .plugindir-compat {
+    flex-shrink: 0;
+    cursor: help;
+    line-height: 1;
+    font-size: 0.95rem;
+    font-weight: bold;
+}
+.block-plugindirectory .plugindir-type {
+    color: #495057;
+    font-size: 0.72rem;
+    flex-shrink: 0;
+    font-family: monospace;
+}
+.block-plugindirectory .plugindir-actions {
+    display: flex;
+    gap: 0.2rem;
+    flex-shrink: 0;
+}
+.block-plugindirectory .plugindir-actions a {
+    color: #495057;
+    text-decoration: none;
+    padding: 0 0.2rem;
+}
+.block-plugindirectory .plugindir-actions a:hover { color: var(--primary, #0f6cbf); }
+
+.block-plugindirectory .plugindir-body {
+    padding: 0.1rem 0.3rem 0.5rem 1.2rem;
+}
+.block-plugindirectory .plugindir-meta {
+    color: #495057;
+    font-size: 0.78rem;
+    margin-bottom: 0.3rem;
+}
+.block-plugindirectory .plugindirectory-readme {
+    max-height: 320px;
+    overflow-y: auto;
+    padding: 0.4rem 0.5rem;
+    background: #fafbfc;
+    border: 1px solid #eef0f2;
+    border-radius: 0.2rem;
+    font-size: 0.78rem;
+}
+.block-plugindirectory .plugindirectory-readme h1,
+.block-plugindirectory .plugindirectory-readme h2,
+.block-plugindirectory .plugindirectory-readme h3 {
+    font-size: 1em;
+    font-weight: 600;
+    margin-top: 0.5em;
+}
+.block-plugindirectory .plugindirectory-readme pre {
+    font-size: 0.78em;
+    overflow-x: auto;
+}
+
+.block-plugindirectory .plugindir-new-pulse {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--success, #28a745);
+    animation: plugindir-pulse 1.8s ease-in-out infinite;
+}
+@keyframes plugindir-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(1.3); }
+}
+</style>
