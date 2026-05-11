@@ -19,7 +19,6 @@ use block_plugindirectory\local\compatibility_checker;
  * @covers     \block_plugindirectory\local\compatibility_checker
  */
 final class compatibility_checker_test extends \advanced_testcase {
-
     public function test_ok_when_no_constraints(): void {
         $info = (object) [
             'versionrequires' => 0,

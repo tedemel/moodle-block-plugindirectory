@@ -19,7 +19,6 @@ use block_plugindirectory\local\install_log;
  * @covers     \block_plugindirectory\local\install_log
  */
 final class install_log_test extends \advanced_testcase {
-
     public function test_earliest_install_times_returns_min_per_plugin(): void {
         global $DB;
         $this->resetAfterTest();

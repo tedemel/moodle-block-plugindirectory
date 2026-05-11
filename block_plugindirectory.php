@@ -31,24 +31,44 @@ defined('MOODLE_INTERNAL') || die();
 
 use block_plugindirectory\local\plugin_collector;
 
+/**
+ * Block "Plugin directory" — lists all non-standard plugins with README and
+ * compatibility information.
+ */
 class block_plugindirectory extends block_base {
-
+    /**
+     * Initialise the block title.
+     */
     public function init(): void {
         $this->title = get_string('pluginname', 'block_plugindirectory');
     }
 
+    /**
+     * Allow the block on the personal dashboard, site front page and admin pages.
+     *
+     * @return array<string,bool>
+     */
     public function applicable_formats(): array {
         return ['my' => true, 'site' => true, 'admin' => true];
     }
 
+    /**
+     * The block has no global or instance configuration.
+     */
     public function has_config(): bool {
         return false;
     }
 
+    /**
+     * Disallow more than one instance per page.
+     */
     public function instance_allow_multiple(): bool {
         return false;
     }
 
+    /**
+     * Build the block contents — delegates to the plugin_collector helper.
+     */
     public function get_content(): ?stdClass {
         if ($this->content !== null) {
             return $this->content;

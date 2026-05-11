@@ -19,7 +19,6 @@ use block_plugindirectory\local\readme_reader;
  * @covers     \block_plugindirectory\local\readme_reader
  */
 final class readme_reader_test extends \advanced_testcase {
-
     public function test_empty_when_no_readme_present(): void {
         $tmp = make_request_directory();
         $this->assertSame('', readme_reader::render($tmp));

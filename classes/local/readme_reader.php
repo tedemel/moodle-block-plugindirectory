@@ -14,6 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
+/**
+ * File for readme_reader.
+ *
+ * @package    block_plugindirectory
+ * @copyright  2026 moodle-td.de
+ * @license    https://www.gnu.org/licenses/gpl-3.0.html GNU GPL v3 or later
+ */
+
 namespace block_plugindirectory\local;
 
 defined('MOODLE_INTERNAL') || die();
@@ -26,11 +34,12 @@ defined('MOODLE_INTERNAL') || die();
  * @license    https://www.gnu.org/licenses/gpl-3.0.html GNU GPL v3 or later
  */
 final class readme_reader {
-
     /** Maximum number of bytes preserved from the original file. */
+    /** @var string|int|array Maximum number of bytes preserved from the original README file. */
     public const MAX_BYTES = 8000;
 
     /** Filenames inspected, in priority order. */
+    /** @var string|int|array README filenames inspected, in priority order. */
     private const CANDIDATES = [
         'README.md', 'README.MD', 'readme.md',
         'README.txt', 'README.TXT', 'readme.txt',

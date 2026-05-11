@@ -1,0 +1,125 @@
+.block-plugindirectory {
+    font-size: 0.85rem;
+    color: #212529;
+}
+.block-plugindirectory .plugindir-toggle-all {
+    color: #212529;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+}
+.block-plugindirectory .plugindir-toggle-all:hover {
+    color: var(--primary, #0f6cbf);
+    text-decoration: none;
+}
+
+.block-plugindirectory [data-plugindir-row] {
+    border-bottom: 1px solid #f0f0f0;
+    margin: 0;
+    background: transparent;
+}
+.block-plugindirectory [data-plugindir-row]:last-child {
+    border-bottom: none;
+}
+.block-plugindirectory [data-plugindir-row]:hover {
+    background: #f8f9fa;
+}
+.block-plugindirectory .plugindir-row-new {
+    border-left: 2px solid var(--success, #28a745);
+    padding-left: 4px;
+}
+
+.block-plugindirectory summary.plugindir-summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.25rem 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+.block-plugindirectory summary.plugindir-summary::-webkit-details-marker { display: none; }
+.block-plugindirectory summary.plugindir-summary::before {
+    content: '▸';
+    color: #495057;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+}
+.block-plugindirectory [data-plugindir-row][open] summary.plugindir-summary::before {
+    content: '▾';
+    color: #212529;
+}
+
+.block-plugindirectory .plugindir-name {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+    font-weight: 500;
+    color: #212529;
+}
+.block-plugindirectory .plugindir-compat {
+    flex-shrink: 0;
+    cursor: help;
+    line-height: 1;
+    font-size: 0.95rem;
+    font-weight: bold;
+}
+.block-plugindirectory .plugindir-type {
+    color: #495057;
+    font-size: 0.72rem;
+    flex-shrink: 0;
+    font-family: monospace;
+}
+.block-plugindirectory .plugindir-actions {
+    display: flex;
+    gap: 0.2rem;
+    flex-shrink: 0;
+}
+.block-plugindirectory .plugindir-actions a {
+    color: #495057;
+    text-decoration: none;
+    padding: 0 0.2rem;
+}
+.block-plugindirectory .plugindir-actions a:hover { color: var(--primary, #0f6cbf); }
+
+.block-plugindirectory .plugindir-body {
+    padding: 0.1rem 0.3rem 0.5rem 1.2rem;
+}
+.block-plugindirectory .plugindir-meta {
+    color: #495057;
+    font-size: 0.78rem;
+    margin-bottom: 0.3rem;
+}
+.block-plugindirectory .plugindirectory-readme {
+    max-height: 320px;
+    overflow-y: auto;
+    padding: 0.4rem 0.5rem;
+    background: #fafbfc;
+    border: 1px solid #eef0f2;
+    border-radius: 0.2rem;
+    font-size: 0.78rem;
+}
+.block-plugindirectory .plugindirectory-readme h1,
+.block-plugindirectory .plugindirectory-readme h2,
+.block-plugindirectory .plugindirectory-readme h3 {
+    font-size: 1em;
+    font-weight: 600;
+    margin-top: 0.5em;
+}
+.block-plugindirectory .plugindirectory-readme pre {
+    font-size: 0.78em;
+    overflow-x: auto;
+}
+
+.block-plugindirectory .plugindir-new-pulse {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--success, #28a745);
+    animation: plugindir-pulse 1.8s ease-in-out infinite;
+}
+@keyframes plugindir-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(1.3); }
+}

@@ -14,6 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
+/**
+ * File for compatibility_checker.
+ *
+ * @package    block_plugindirectory
+ * @copyright  2026 moodle-td.de
+ * @license    https://www.gnu.org/licenses/gpl-3.0.html GNU GPL v3 or later
+ */
+
 namespace block_plugindirectory\local;
 
 defined('MOODLE_INTERNAL') || die();
@@ -30,9 +38,11 @@ defined('MOODLE_INTERNAL') || die();
  * @license    https://www.gnu.org/licenses/gpl-3.0.html GNU GPL v3 or later
  */
 final class compatibility_checker {
-
+    /** @var string|int|array Compatibility verdict: plugin is fully compatible. */
     public const STATUS_OK       = 'success';
+    /** @var string|int|array Compatibility verdict: plugin may work but is outside its declared support range. */
     public const STATUS_WARN     = 'warning';
+    /** @var string|int|array Compatibility verdict: plugin is known incompatible or below required core version. */
     public const STATUS_DANGER   = 'danger';
 
     /**

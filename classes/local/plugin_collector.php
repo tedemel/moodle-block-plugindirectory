@@ -14,6 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
+/**
+ * File for plugin_collector.
+ *
+ * @package    block_plugindirectory
+ * @copyright  2026 moodle-td.de
+ * @license    https://www.gnu.org/licenses/gpl-3.0.html GNU GPL v3 or later
+ */
+
 namespace block_plugindirectory\local;
 
 defined('MOODLE_INTERNAL') || die();
@@ -27,13 +35,13 @@ defined('MOODLE_INTERNAL') || die();
  * @license    https://www.gnu.org/licenses/gpl-3.0.html GNU GPL v3 or later
  */
 final class plugin_collector {
-
     /**
      * Whitelist of "main" plugin types. Subplugin types (e.g.
      * customcertelement_*, certificateelement_*, realtimeplugin_*) are
      * filtered out so the block stays focused on the user-facing plugin
      * inventory.
      */
+    /** @var string|int|array Whitelist of "main" Moodle plugin types considered by the dashboard. */
     private const MAIN_TYPES = [
         'antivirus', 'auth', 'availability', 'block', 'communication',
         'contenttype', 'customfield', 'dataformat', 'editor', 'enrol',
@@ -45,6 +53,7 @@ final class plugin_collector {
     ];
 
     /** A plugin counts as "new" if it was installed in the last week. */
+    /** @var string|int|array Window in seconds during which a freshly installed plugin counts as "new". */
     private const NEW_WINDOW = 7 * DAYSECS;
 
     /**
@@ -73,7 +82,8 @@ final class plugin_collector {
         }
 
         // Verify Moodle-directory existence for rows that don't have a URL yet.
-        $unverified = array_filter(array_column($rows, 'component', null), function ($_, $i) use ($rows) {
+        $unverified = array_filter(array_column($rows, 'component', null), function ($unused, $i) use ($rows) {
+            unset($unused);
             return empty($rows[$i]['moodledirurl']);
         }, ARRAY_FILTER_USE_BOTH);
 

@@ -14,6 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
+/**
+ * File for moodledir_verifier.
+ *
+ * @package    block_plugindirectory
+ * @copyright  2026 moodle-td.de
+ * @license    https://www.gnu.org/licenses/gpl-3.0.html GNU GPL v3 or later
+ */
+
 namespace block_plugindirectory\local;
 
 defined('MOODLE_INTERNAL') || die();
@@ -30,10 +38,13 @@ defined('MOODLE_INTERNAL') || die();
  * @license    https://www.gnu.org/licenses/gpl-3.0.html GNU GPL v3 or later
  */
 final class moodledir_verifier {
-
+    /** @var string|int|array config_plugins key under which verifier results are cached. */
     private const CACHE_KEY    = 'moodledir_cache';
+    /** @var string|int|array Cache lifetime for a verified plugin-directory entry. */
     private const CACHE_TTL    = 7 * DAYSECS;
+    /** @var string|int|array Total cURL timeout (seconds) per HEAD request. */
     private const TIMEOUT      = 4;
+    /** @var string|int|array cURL connect timeout (seconds) per HEAD request. */
     private const CONNECT_TIME = 3;
 
     /**

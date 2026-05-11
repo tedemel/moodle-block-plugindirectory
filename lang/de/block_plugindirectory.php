@@ -14,6 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
+/**
+ * German language strings for block_plugindirectory.
+ *
+ * @package    block_plugindirectory
+ * @copyright  2026 moodle-td.de
+ * @license    https://www.gnu.org/licenses/gpl-3.0.html GNU GPL v3 or later
+ */
+
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname']        = 'Zusatz-Plugin-Verzeichnis';

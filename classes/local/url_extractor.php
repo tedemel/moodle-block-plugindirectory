@@ -14,6 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
+/**
+ * File for url_extractor.
+ *
+ * @package    block_plugindirectory
+ * @copyright  2026 moodle-td.de
+ * @license    https://www.gnu.org/licenses/gpl-3.0.html GNU GPL v3 or later
+ */
+
 namespace block_plugindirectory\local;
 
 defined('MOODLE_INTERNAL') || die();
@@ -31,8 +39,9 @@ defined('MOODLE_INTERNAL') || die();
  * @license    https://www.gnu.org/licenses/gpl-3.0.html GNU GPL v3 or later
  */
 final class url_extractor {
-
+    /** @var string|int|array Regex matching a GitHub repository URL. */
     private const PATTERN_GITHUB    = '#https://github\.com/[\w.\-]+/[\w.\-]+#';
+    /** @var string|int|array Regex matching a Moodle Plugin Directory URL. */
     private const PATTERN_MOODLEDIR = '#https://moodle\.org/plugins/[\w./\-]+#';
 
     /**

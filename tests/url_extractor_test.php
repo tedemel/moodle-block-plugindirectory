@@ -19,7 +19,6 @@ use block_plugindirectory\local\url_extractor;
  * @covers     \block_plugindirectory\local\url_extractor
  */
 final class url_extractor_test extends \advanced_testcase {
-
     public function test_strip_html_preserving_hrefs_keeps_anchor_targets(): void {
         $html = '<p>Source: <a href="https://example.com/repo">repo</a></p>';
         $plain = url_extractor::strip_html_preserving_hrefs($html);
