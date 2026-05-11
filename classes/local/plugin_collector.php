@@ -105,14 +105,14 @@ final class plugin_collector {
         return $rows;
     }
 
-    /**
+        /**
      * Build a single row from a plugininfo object.
      *
-     * @param object                 $info
-     * @param string                 $type
-     * @param string                 $typename
-     * @param array<string,int>      $installtimes
-     * @param int                    $newthreshold
+     * @param object $info plugininfo object.
+     * @param string $type Plugin type.
+     * @param string $typename Human-readable type label.
+     * @param array<string,int> $installtimes Map component=>install timestamp.
+     * @param int $newthreshold Cutoff timestamp below which a plugin is no longer "new".
      * @return array<string,mixed>
      */
     private static function build_row(

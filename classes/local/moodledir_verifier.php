@@ -81,11 +81,12 @@ final class moodledir_verifier {
         return $result;
     }
 
-    /**
+        /**
      * Run HEAD requests in parallel and return cache fragments keyed by
      * component.
      *
-     * @param string[] $components
+     * @param string[] $components Components to query.
+     * @param int $now Current unix timestamp.
      * @return array<string,array{exists:bool,t:int}>
      */
     private static function check_remote(array $components, int $now): array {

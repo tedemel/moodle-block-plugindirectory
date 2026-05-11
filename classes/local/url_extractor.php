@@ -43,25 +43,36 @@ final class url_extractor {
     /** @var string|int|array Regex matching a Moodle Plugin Directory URL. */
     private const PATTERN_MOODLEDIR = '#https://moodle\.org/plugins/[\w./\-]+#';
 
-    /**
+        /**
      * Find a GitHub repo URL — first in the rendered README, then in version.php.
+     *
+     * @param string $rootdir Plugin root directory.
+     * @param string $readmecontent Pre-rendered README HTML.
+     * @return string
      */
     public static function extract_github_url(string $rootdir, string $readmecontent): string {
         return self::find_url($rootdir, $readmecontent, self::PATTERN_GITHUB);
     }
 
-    /**
+        /**
      * Find a Moodle Plugin Directory URL — first in the rendered README, then
      * in version.php.
+     *
+     * @param string $rootdir Plugin root directory.
+     * @param string $readmecontent Pre-rendered README HTML.
+     * @return string
      */
     public static function extract_moodledir_url(string $rootdir, string $readmecontent): string {
         return self::find_url($rootdir, $readmecontent, self::PATTERN_MOODLEDIR);
     }
 
-    /**
+        /**
      * Convert HTML to plain text but inline href URLs from anchors first.
      *
      * Exposed for tests; production callers should use the extract_* methods.
+     *
+     * @param string $html HTML input.
+     * @return string Plain text including inlined href URLs.
      */
     public static function strip_html_preserving_hrefs(string $html): string {
         $with = preg_replace(
@@ -72,8 +83,13 @@ final class url_extractor {
         return strip_tags($with ?? $html);
     }
 
-    /**
+        /**
      * Apply the pattern to the README text first, fall back to version.php.
+     *
+     * @param string $rootdir Plugin root directory.
+     * @param string $readmecontent Pre-rendered README HTML.
+     * @param string $pattern PCRE pattern to apply.
+     * @return string
      */
     private static function find_url(string $rootdir, string $readmecontent, string $pattern): string {
         $plain = self::strip_html_preserving_hrefs($readmecontent);

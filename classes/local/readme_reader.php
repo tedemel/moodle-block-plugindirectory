@@ -44,10 +44,13 @@ final class readme_reader {
         'README.txt', 'README.TXT', 'readme.txt',
     ];
 
-    /**
+        /**
      * Locate, read and render the README for a plugin root.
      *
      * Returns the empty string if no readable README is found or it is blank.
+     *
+     * @param string $rootdir Absolute path to the plugin directory.
+     * @return string
      */
     public static function render(string $rootdir): string {
         foreach (self::CANDIDATES as $filename) {
