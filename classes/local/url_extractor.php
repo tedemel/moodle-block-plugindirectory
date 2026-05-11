@@ -24,7 +24,6 @@
 
 namespace block_plugindirectory\local;
 
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Extracts GitHub and Moodle-Plugin-Directory URLs from a plugin's README and

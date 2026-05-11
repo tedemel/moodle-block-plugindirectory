@@ -24,7 +24,6 @@
 
 namespace block_plugindirectory\local;
 
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Determines compatibility of an installed plugin against the current Moodle core.

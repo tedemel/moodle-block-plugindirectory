@@ -24,7 +24,6 @@
 
 namespace block_plugindirectory\local;
 
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Reads and renders README.md / README.txt from a plugin root directory.

@@ -24,7 +24,6 @@
 
 namespace block_plugindirectory\local;
 
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Verifies which Moodle components actually exist in the public Moodle Plugin

@@ -24,7 +24,6 @@
 
 namespace block_plugindirectory\local;
 
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Reads earliest install timestamps from the upgrade_log.
