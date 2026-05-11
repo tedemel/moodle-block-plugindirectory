@@ -105,7 +105,7 @@ final class plugin_collector {
         return $rows;
     }
 
-        /**
+    /**
      * Build a single row from a plugininfo object.
      *
      * @param object $info plugininfo object.
