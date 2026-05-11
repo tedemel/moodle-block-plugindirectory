@@ -108,7 +108,7 @@ final class plugin_collector {
     /**
      * Build a single row from a plugininfo object.
      *
-     * @param \stdClass $info Plugininfo object.
+     * @param object $info Plugininfo object.
      * @param string $type Plugin type.
      * @param string $typename Human-readable type label.
      * @param array $installtimes Map component=>install timestamp.
