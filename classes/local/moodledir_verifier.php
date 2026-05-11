@@ -81,7 +81,7 @@ final class moodledir_verifier {
         return $result;
     }
 
-        /**
+    /**
      * Run HEAD requests in parallel and return cache fragments keyed by
      * component.
      *

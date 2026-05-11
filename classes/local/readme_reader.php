@@ -44,7 +44,7 @@ final class readme_reader {
         'README.txt', 'README.TXT', 'readme.txt',
     ];
 
-        /**
+    /**
      * Locate, read and render the README for a plugin root.
      *
      * Returns the empty string if no readable README is found or it is blank.

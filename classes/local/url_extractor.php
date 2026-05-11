@@ -43,7 +43,7 @@ final class url_extractor {
     /** @var string|int|array Regex matching a Moodle Plugin Directory URL. */
     private const PATTERN_MOODLEDIR = '#https://moodle\.org/plugins/[\w./\-]+#';
 
-        /**
+    /**
      * Find a GitHub repo URL — first in the rendered README, then in version.php.
      *
      * @param string $rootdir Plugin root directory.
@@ -54,7 +54,7 @@ final class url_extractor {
         return self::find_url($rootdir, $readmecontent, self::PATTERN_GITHUB);
     }
 
-        /**
+    /**
      * Find a Moodle Plugin Directory URL — first in the rendered README, then
      * in version.php.
      *
@@ -66,7 +66,7 @@ final class url_extractor {
         return self::find_url($rootdir, $readmecontent, self::PATTERN_MOODLEDIR);
     }
 
-        /**
+    /**
      * Convert HTML to plain text but inline href URLs from anchors first.
      *
      * Exposed for tests; production callers should use the extract_* methods.
@@ -83,7 +83,7 @@ final class url_extractor {
         return strip_tags($with ?? $html);
     }
 
-        /**
+    /**
      * Apply the pattern to the README text first, fall back to version.php.
      *
      * @param string $rootdir Plugin root directory.
