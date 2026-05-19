@@ -3,6 +3,8 @@
 Ein Admin-Block für das Moodle-Dashboard, der alle installierten Zusatz-Plugins
 (non-core, non-subplugin) übersichtlich auflistet.
 
+**Unterstützte Moodle-Versionen:** 4.5 LTS, 5.0, 5.1, 5.2
+
 ## Features
 
 - **Kompakte Zeilen-Ansicht** — Click-to-expand für Details
@@ -24,3 +26,7 @@ Ein Admin-Block für das Moodle-Dashboard, der alle installierten Zusatz-Plugins
 ## Lizenz
 
 GPL v3 or later — siehe Header der Quelldateien.
+
+## Changelog
+
+Siehe [CHANGELOG.md](CHANGELOG.md).
